@@ -1,0 +1,78 @@
+{
+  "name": "@pantajoe/bytes",
+  "type": "module",
+  "version": "1.0.0",
+  "packageManager": "pnpm@8.15.2",
+  "description": "A tiny utility to parse/format byte sizes from/to a human-readable format.",
+  "author": {
+    "name": "pantajoe",
+    "url": "https://joepantazidis.me"
+  },
+  "license": "MIT",
+  "repository": "pantajoe/bytes",
+  "keywords": [
+    "byte",
+    "human",
+    "format",
+    "humanize",
+    "pretty",
+    "size",
+    "bytes",
+    "bytesize",
+    "formatting",
+    "byte-size",
+    "human-readable",
+    "file-size",
+    "filesize"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "vitest dev",
+    "prepack": "pnpm build",
+    "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
+    "test": "vitest && vitest run --coverage",
+    "lint": "eslint --max-warnings=0 .",
+    "lint:fix": "eslint --fix --max-warnings=0 .",
+    "typecheck": "tsc --noEmit --skipLibCheck",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.8.3",
+    "@commitlint/cli": "^19.2.0",
+    "@commitlint/config-conventional": "^19.1.0",
+    "@types/node": "^20.11.28",
+    "@vitest/coverage-v8": "^1.4.0",
+    "changelogen": "^0.5.5",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.2",
+    "unbuild": "^2.0.0",
+    "vitest": "^1.4.0"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  }
+}
