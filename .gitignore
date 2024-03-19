@@ -9,3 +9,9 @@ coverage/
 
 # BetterToDos
 TODO
+
+# OS
+.DS_Store
+
+# Logs
+*.log
