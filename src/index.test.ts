@@ -19,13 +19,22 @@ describe('#formatBytes', () => {
     })
   })
 
-  describe('with base 1000', () => {
+  describe('with base 10', () => {
     beforeAll(() => {
-      opts = { base: 1000, decimals: 2 }
+      opts = { base: 10, decimals: 2 }
     })
 
-    it('should use the closest unit with base 1000', () => {
+    it('should use the closest unit with base 10', () => {
       expect(result).toBe('52.85 MB')
+    })
+  })
+
+  describe('with an invalid base', () => {
+    it('should throw an error', () => {
+      // @ts-expect-error - Testing invalid input
+      expect(() => utils.formatBytes(50, { base: 3 })).toThrow(
+        'Unsupported base. base=3',
+      )
     })
   })
 
@@ -232,7 +241,7 @@ describe('#createBytes', () => {
   let byteUtils: ReturnType<typeof utils.createBytes>
 
   beforeEach(() => {
-    byteUtils = utils.createBytes({ base: 1000, locale: 'de-DE' })
+    byteUtils = utils.createBytes({ base: 10, locale: 'de-DE' })
   })
 
   it('should return an object with all byte conversion functions', () => {

@@ -2,9 +2,9 @@ interface ByteFormatConfig {
   /**
    * The base to use for the conversion.
    *
-   * @default 1024
+   * @default 2
    */
-  base?: 1000 | 1024
+  base?: 2 | 10
 
   /**
    * The default locale to use for parsing/formatting the output.
@@ -15,7 +15,7 @@ interface ByteFormatConfig {
 }
 
 const BYTE_FORMAT_DEFAULTS: Required<ByteFormatConfig> = {
-  base: 1024,
+  base: 2,
   locale: 'en-US',
 } as const
 
@@ -69,9 +69,21 @@ export type StringValue =
   | `${number} ${UnitAnyCase}`
 
 export interface ParseByteOptions extends ByteFormatConfig {}
-export interface FormateByteOptions extends ByteFormatConfig {
+export interface FormateByteOptions
+  extends ByteFormatConfig,
+    Omit<
+      Intl.NumberFormatOptions,
+      | 'style'
+      | 'unit'
+      | 'unitDisplay'
+      | 'currencyDisplay'
+      | 'currencySign'
+      | 'currency'
+    > {
   /**
    * Specify the number of decimals to include in the output.
+   *
+   * **Note**: If `minFractionDigits` or `maxFractionDigits` are set, this option will be ignored.
    *
    * @default 0
    */
@@ -135,10 +147,19 @@ export function bytes(value: string, options?: ParseByteOptions): number {
     (unit) => unit.short[0].toUpperCase() === type[0],
   )
 
-  const base = options?.base || BYTE_FORMAT_DEFAULTS.base
+  const base = fromBase(options?.base || BYTE_FORMAT_DEFAULTS.base)
 
   return n * base ** level
 }
+
+/**
+ * Parse the given bytesize string and return bytes.
+ *
+ * @param value - The string to parse
+ * @param options - Options for the conversion from string to bytes
+ * @throws Error if `value` is not a non-empty string or a number
+ */
+export const parseBytes = bytes
 
 /**
  * Formats the given bytes into a human-readable string.
@@ -161,8 +182,10 @@ export function formatBytes(
     long = false,
     unit: requestedUnit,
     locale = BYTE_FORMAT_DEFAULTS.locale,
-    base = BYTE_FORMAT_DEFAULTS.base,
+    base: givenBase,
+    ...l10nOptions
   } = options || {}
+  const base = fromBase(givenBase || BYTE_FORMAT_DEFAULTS.base)
 
   const absoluteBytes = Math.abs(bytes)
 
@@ -179,11 +202,11 @@ export function formatBytes(
   const unit = BYTE_SIZES[level][long ? 'long' : 'short']
 
   const value = bytes / base ** level
-
-  const fractionDigits = decimals < 0 ? 0 : decimals
+  const fractionDigits = decimals < 0 ? undefined : decimals
   const formattedValue = new Intl.NumberFormat(locale, {
     minimumFractionDigits: fractionDigits,
     maximumFractionDigits: fractionDigits,
+    ...l10nOptions,
   }).format(value)
 
   return `${formattedValue} ${unit}`
@@ -224,7 +247,7 @@ const byteConversionUtils: ByteConversionUtils = BYTE_SIZES.reduce(
 
     const functionName = long.toLowerCase() as Lowercase<typeof long>
     acc[functionName] = (value, opts) =>
-      value * (opts?.base || BYTE_FORMAT_DEFAULTS.base) ** level
+      value * fromBase(opts?.base || BYTE_FORMAT_DEFAULTS.base) ** level
     return acc
   },
   {} as ByteConversionUtils,
@@ -243,6 +266,7 @@ export const {
 
 interface ByteUtilities extends ByteConversionUtils {
   bytes: typeof bytes
+  parseBytes: typeof bytes
   formatBytes: typeof formatBytes
 }
 
@@ -254,7 +278,7 @@ export function createBytes(options: ByteFormatConfig): ByteUtilities {
 
       const functionName = long.toLowerCase() as Lowercase<typeof long>
       acc[functionName] = (value, opts) => {
-        return value * (opts?.base || byteFormat.base) ** level
+        return value * fromBase(opts?.base || byteFormat.base) ** level
       }
       return acc
     },
@@ -269,6 +293,12 @@ export function createBytes(options: ByteFormatConfig): ByteUtilities {
         locale: byteFormat.locale,
         ...opts,
       }),
+    parseBytes: (value, opts) =>
+      bytes(value, {
+        base: byteFormat.base,
+        locale: byteFormat.locale,
+        ...opts,
+      }),
     formatBytes: (value, opts) =>
       formatBytes(value, {
         base: byteFormat.base,
@@ -276,4 +306,11 @@ export function createBytes(options: ByteFormatConfig): ByteUtilities {
         ...opts,
       }),
   }
+}
+
+function fromBase(base: 2 | 10) {
+  if (base === 2) return 1024
+  if (base === 10) return 1000
+
+  throw new TypeError(`Unsupported base. base=${base}`)
 }
