@@ -5,9 +5,9 @@
 # @pantajoe/bytes
 
 > Convert bytes to human readable strings and vice versa:
-> 1024 -> 1KB and 1KB -> 1024
+> 1024 → 1KB and 1KB → 1024
 
-A tiny utility (**4.52KB**) to convert bytes to a formatted string and vice versa.
+A tiny utility (**4.96KB**) to convert bytes to a formatted string and vice versa.
 
 ## ✨ Highlights
 
