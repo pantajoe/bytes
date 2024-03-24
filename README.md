@@ -1,6 +1,6 @@
 [![codecov](https://codecov.io/gh/pantajoe/bytes/graph/badge.svg?token=T6FH2EEDT2)](https://codecov.io/gh/pantajoe/bytes)
 [![Build Status](https://github.com/pantajoe/bytes/actions/workflows/ci.yml/badge.svg)](https://github.com/pantajoe/bytes/actions)
-[![npm version](https://badge.fury.io/js/%40pantajoe%2Fbytes.svg)](https://badge.fury.io/js/%40pantajoe%2Fbytes)
+[![npm version](https://badge.fury.io/js/@pantajoe%2Fbytes.svg)](https://badge.fury.io/js/@pantajoe%2Fbytes)
 
 # @pantajoe/bytes
 
