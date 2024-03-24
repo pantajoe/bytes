@@ -222,6 +222,31 @@ describe('#bytes', () => {
   })
 })
 
+describe('#parseBytes', () => {
+  let value: string
+  let result: number
+
+  beforeEach(() => {
+    result = utils.parseBytes(value)
+  })
+
+  describe('with a simple number', () => {
+    beforeAll(() => {
+      value = '50'
+    })
+
+    it('should parse the number', () => {
+      expect(result).toBe(50)
+    })
+  })
+
+  describe('should equal to bytes', () => {
+    it('should equal to bytes', () => {
+      expect(utils.parseBytes).toBe(utils.bytes)
+    })
+  })
+})
+
 describe.each([
   { unit: 'kilobytes', power: 1 },
   { unit: 'megabytes', power: 2 },
@@ -266,6 +291,22 @@ describe('#createBytes', () => {
 
     it('should return the correct number of bytes', () => {
       expect(result).toBe(50 * 1000)
+    })
+  })
+
+  describe('when calling the parseBytes function', () => {
+    let result: number
+
+    beforeEach(() => {
+      result = byteUtils.parseBytes('50 KB')
+    })
+
+    it('should return the correct number of bytes', () => {
+      expect(result).toBe(50 * 1000)
+    })
+
+    it('should equal to bytes', () => {
+      expect(byteUtils.parseBytes).toBe(byteUtils.bytes)
     })
   })
 

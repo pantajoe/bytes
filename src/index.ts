@@ -285,20 +285,19 @@ export function createBytes(options: ByteFormatConfig): ByteUtilities {
     {} as ByteConversionUtils,
   )
 
+  const parse = {
+    bytes: (value: string, opts?: ParseByteOptions) =>
+      bytes(value, {
+        base: byteFormat.base,
+        locale: byteFormat.locale,
+        ...opts,
+      }),
+  }.bytes
+
   return {
     ...byteConversionUtils,
-    bytes: (value, opts) =>
-      bytes(value, {
-        base: byteFormat.base,
-        locale: byteFormat.locale,
-        ...opts,
-      }),
-    parseBytes: (value, opts) =>
-      bytes(value, {
-        base: byteFormat.base,
-        locale: byteFormat.locale,
-        ...opts,
-      }),
+    bytes: parse,
+    parseBytes: parse,
     formatBytes: (value, opts) =>
       formatBytes(value, {
         base: byteFormat.base,
