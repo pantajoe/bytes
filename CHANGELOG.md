@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v1.0.1
+
+[compare changes](https://github.com/pantajoe/bytes/compare/v1.0.0...v1.0.1)
+
+### 📖 Documentation
+
+- Fix filesize ([73ac65b](https://github.com/pantajoe/bytes/commit/73ac65b))
+- Fix badge ([ea0621a](https://github.com/pantajoe/bytes/commit/ea0621a))
+
+### 🏡 Chore
+
+- Fix types for cjs require statement ([9447e55](https://github.com/pantajoe/bytes/commit/9447e55))
+
+### ✅ Tests
+
+- Increase coverage to 100% ([bf80259](https://github.com/pantajoe/bytes/commit/bf80259))
+
+### ❤️ Contributors
+
+- Joe Pantazidis <joe.pantazidis@outlook.de>
+
 ## v1.0.0
 
 

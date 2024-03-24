@@ -1,7 +1,7 @@
 {
   "name": "@pantajoe/bytes",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "packageManager": "pnpm@8.15.2",
   "description": "A tiny utility to parse/format byte sizes from/to a human-readable format.",
   "author": {
