@@ -6,7 +6,7 @@ env:
 
 jobs:
   test:
-    name: Lint & Typecheck
+    name: Lint & Test
     runs-on: ubuntu-latest
 
     steps:
