@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.2
+
+[compare changes](https://github.com/pantajoe/bytes/compare/v1.0.1...v1.0.2)
+
+### 🩹 Fixes
+
+- Fix error when formatting 0 bytes ([bd2b654](https://github.com/pantajoe/bytes/commit/bd2b654))
+
+### ❤️ Contributors
+
+- Joe Pantazidis <joe.pantazidis@outlook.de>
+
 ## v1.0.1
 
 [compare changes](https://github.com/pantajoe/bytes/compare/v1.0.0...v1.0.1)
