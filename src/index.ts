@@ -192,6 +192,9 @@ export function formatBytes(
   const requestedUnitIndex = BYTE_SIZES.findIndex(
     (unit) => unit.short === requestedUnit,
   )
+  if (bytes === 0)
+    return `0 ${BYTE_SIZES[Math.min(0, Math.max(requestedUnitIndex, BYTE_SIZES.length - 1))][long ? 'long' : 'short']}`
+
   const level =
     requestedUnitIndex >= 0
       ? requestedUnitIndex

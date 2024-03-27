@@ -122,6 +122,16 @@ describe('#formatBytes', () => {
       )
     })
   })
+
+  describe('when passing 0', () => {
+    beforeAll(() => {
+      opts = {}
+    })
+
+    it('should return 0 Bytes', () => {
+      expect(utils.formatBytes(0, opts)).toBe('0 Bytes')
+    })
+  })
 })
 
 describe('#bytes', () => {
