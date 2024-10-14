@@ -38,7 +38,7 @@ jobs:
         run: pnpm test
 
       - name: Code Coverage 📊
-        uses: codecov/codecov-action@v4.5.0
+        uses: codecov/codecov-action@v4.6.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: pantajoe/bytes
