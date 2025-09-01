@@ -16,7 +16,7 @@ jobs:
       - name: Setup pnpm 🏗
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 8.15.9
       - name: Get Node.js Version 📖
         run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
       - name: Setup Node.js 🏗
