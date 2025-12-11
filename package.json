@@ -59,7 +59,7 @@
     "@antfu/eslint-config": "^2.8.3",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@types/node": "^20.19.11",
+    "@types/node": "^20.19.26",
     "@vitest/coverage-v8": "^1.6.1",
     "changelogen": "^0.6.2",
     "eslint": "^8.57.0",
@@ -68,7 +68,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.5.2",
     "prettier": "^3.6.2",
-    "typescript": "^5.9.2",
+    "typescript": "^5.9.3",
     "unbuild": "^2.0.0",
     "vitest": "^1.6.1"
   },
